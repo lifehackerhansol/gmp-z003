@@ -9,7 +9,7 @@ void m3_card_wait_ready(u32 flags, u8 *command)
     REG_ROMCTRL = flags;
     do {
       if (REG_ROMCTRL & CARD_DATA_READY)
-        if (!CARD_DATA_RD) ready = true;
+        if (!REG_CARD_DATA_RD) ready = true;
     } while (REG_ROMCTRL & CARD_BUSY);
   } while (!ready);
 }
@@ -58,7 +58,7 @@ void write_card(u32 address, u32 *source, u32 length, u8 type)
           data = *source;
       }
       source++;
-      CARD_DATA_RD = data;
+      REG_CARD_DATA_RD = data;
     }
   } while (REG_ROMCTRL & CARD_BUSY);
   command[7] = 0xC6; // GMP-Z003

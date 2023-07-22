@@ -21,7 +21,7 @@ void ioM3CardWaitReady(u32 flags, u8 *command)
     REG_ROMCTRL = flags;
     do {
       if (REG_ROMCTRL & CARD_DATA_READY)
-        if (!CARD_DATA_RD) ready = true;
+        if (!REG_CARD_DATA_RD) ready = true;
     } while (REG_ROMCTRL & CARD_BUSY);
   } while (!ready);
 }
